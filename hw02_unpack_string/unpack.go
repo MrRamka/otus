@@ -35,28 +35,21 @@ func Unpack(str string) (string, error) {
 
 	i := 0
 	for i < arrayLen {
-		currentElement := inputStingRuneArray[i]
-		nextElement := inputStingRuneArray[i+1]
-		if currentElement == BACKSLASH &&
-			(unicode.IsDigit(nextElement) || nextElement == BACKSLASH) {
+		if inputStingRuneArray[i] == BACKSLASH &&
+			(unicode.IsDigit(inputStingRuneArray[i+1]) || inputStingRuneArray[i+1] == BACKSLASH) {
 			i++
 		}
-		// Обновляем значение, так как index мог поменятся
-		currentElement = inputStingRuneArray[i]
-		nextElement = inputStingRuneArray[i+1]
 
 		if i < arrayLen-1 {
-			if unicode.IsDigit(nextElement) {
-				repeatCount, _ := strconv.Atoi(string(nextElement))
-				stringBuilder.WriteString(strings.Repeat(string(currentElement), repeatCount))
+			if unicode.IsDigit(inputStingRuneArray[i+1]) {
+				repeatCount, _ := strconv.Atoi(string(inputStingRuneArray[i+1]))
+				stringBuilder.WriteString(strings.Repeat(string(inputStingRuneArray[i]), repeatCount))
 				i += 2
 				continue
 			}
 		}
 
-		// Обновляем значение, так как index мог поменятся
-		currentElement = inputStingRuneArray[i]
-		stringBuilder.WriteRune(currentElement)
+		stringBuilder.WriteRune(inputStingRuneArray[i])
 		i++
 	}
 	return stringBuilder.String(), nil
