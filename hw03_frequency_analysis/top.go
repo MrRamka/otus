@@ -35,5 +35,10 @@ func Top10(inputText string) []string {
 		return firstElementAmount > secondElementAmount
 	})
 
+	uniqueWordsLen := len(uniqueWords)
+	if uniqueWordsLen < AmountWords {
+		return uniqueWords[:uniqueWordsLen]
+	}
+
 	return uniqueWords[:AmountWords]
 }
