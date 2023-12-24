@@ -79,4 +79,20 @@ func TestTop10(t *testing.T) {
 			require.Equal(t, expected, Top10(text))
 		}
 	})
+
+	t.Run("words less than 10", func(t *testing.T) {
+		expected := []string{
+			"Как",     // 1
+			"видите,", // 1
+			"он",      // 1
+		}
+		require.Equal(t, expected, Top10(text[:26]))
+	})
+
+	t.Run("not unicode symbols", func(t *testing.T) {
+		expected := []string{
+			"¬", // 3
+		}
+		require.Equal(t, expected, Top10("¬ ¬ ¬"))
+	})
 }
